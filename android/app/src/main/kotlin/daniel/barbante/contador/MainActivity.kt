@@ -1,4 +1,4 @@
-package pedrohaveloso.dev.contador
+package daniel.barbante.contador
 
 import io.flutter.embedding.android.FlutterActivity
 

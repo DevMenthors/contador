@@ -1,10 +1,9 @@
 name: contador
-description: Contador.
-publish_to: 'none'
+description: Contador em Flutter.
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.0.5 <4.0.0'
 
 dependencies:
   flutter:
@@ -14,6 +13,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  very_good_analysis: ^5.0.0+1
 
 flutter:
   uses-material-design: true
