@@ -1,5 +1,5 @@
-import 'package:contador/view/cadastro.dart';
-import 'package:contador/view/nova_tela.dart';
+import 'package:contador/view/pages/cadastro.dart';
+import 'package:contador/view/pages/nova_tela.dart';
 import 'package:flutter/material.dart';
 
 class TelaInicial extends StatefulWidget {
@@ -29,7 +29,7 @@ class _TelaState extends State<TelaInicial> {
     return Scaffold(
       drawer: Drawer(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -40,9 +40,8 @@ class _TelaState extends State<TelaInicial> {
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20)
-                    )
-                    
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -51,20 +50,24 @@ class _TelaState extends State<TelaInicial> {
                       ),
                     );
                   },
-                  child: const Text('Nova página', style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    'Nova página',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
-              const SizedBox(height: 8,),
-               SizedBox(
+              const SizedBox(
+                height: 8,
+              ),
+              SizedBox(
                 width: double.infinity,
                 height: 60,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Colors.red,
                     shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20)
-                    )
-                    
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -73,9 +76,12 @@ class _TelaState extends State<TelaInicial> {
                       ),
                     );
                   },
-                  child: const Text('Cadastrar-se', style: TextStyle(color: Colors.white),),
+                  child: const Text(
+                    'Cadastrar-se',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -97,7 +103,7 @@ class _TelaState extends State<TelaInicial> {
       ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               SizedBox(
@@ -137,7 +143,7 @@ class _TelaState extends State<TelaInicial> {
                     fontSize: 60,
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

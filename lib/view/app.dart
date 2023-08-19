@@ -1,4 +1,4 @@
-import 'package:contador/view/tela_inicial.dart';
+import 'package:contador/view/pages/tela_inicial.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {

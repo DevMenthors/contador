@@ -23,10 +23,13 @@ class Novatela extends StatelessWidget {
       ),
       body: const Column(
         mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Eu sou uma nova página", style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500))
-          ],
-        ),
+        children: [
+          Text(
+            'Eu sou uma nova página',
+            style: TextStyle(fontSize: 40, fontWeight: FontWeight.w500),
+          ),
+        ],
+      ),
     );
   }
 }
