@@ -1,4 +1,5 @@
 import 'package:contador/view/widgets/alerta.dart';
+import 'package:contador/view/widgets/mixin_cotrole.dart';
 import 'package:flutter/material.dart';
 
 class Cadastro extends StatefulWidget {
@@ -8,9 +9,10 @@ class Cadastro extends StatefulWidget {
   State<Cadastro> createState() => _CadastroState();
 }
 
-class _CadastroState extends State<Cadastro> {
+class _CadastroState extends State<Cadastro> with ValidatorMixin {
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
     final controllerName = TextEditingController();
     final controllerEmail = TextEditingController();
     final controllerBirth = TextEditingController();
@@ -57,6 +59,9 @@ class _CadastroState extends State<Cadastro> {
             ),
             const Spacer(),
             Form(
+              // aqui foi criada uma key para o form onde foi declarada acima do 
+              // scaffold e ultilizada no onpessed
+              key: _formKey,
               child: Column(
                 children: [
                   SizedBox(
@@ -70,6 +75,9 @@ class _CadastroState extends State<Cadastro> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      // aqui mostra como é usado o message do
+                      // mixin para mensagem personalizada
+                      validator: (value) => isNotEmpty(value, 'Nome inválido!'),
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -84,6 +92,8 @@ class _CadastroState extends State<Cadastro> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      //Como chamamos o mixin para validar
+                      validator: isNotEmpty,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -98,6 +108,7 @@ class _CadastroState extends State<Cadastro> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      validator: isNotEmpty,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -112,6 +123,13 @@ class _CadastroState extends State<Cadastro> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      //Aqui podemos usar o mixin para multiplas validações
+                      //como para verificar se está vazio 
+                      //como se tem 11 caracteres
+                      validator: (value) => combine([
+                        () => isNotEmpty(value),
+                        () => hasElevenChars(value),
+                      ]),
                     ),
                   ),
                 ],
@@ -122,18 +140,22 @@ class _CadastroState extends State<Cadastro> {
               width: double.infinity,
               height: 50,
               child: FilledButton(
+                //chama todos os validators, caso seja validado mostra o alerta
+                //caso contrario não mostra
                 onPressed: () {
-                  showDialog<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Alerta(
-                        controllerName: controllerName,
-                        controllerEmail: controllerEmail,
-                        controllerBirth: controllerBirth,
-                        controllerPhone: controllerPhone,
-                      );
-                    },
-                  );
+                  if (_formKey.currentState!.validate()) {
+                    showDialog<void>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Alerta(
+                          controllerName: controllerName,
+                          controllerEmail: controllerEmail,
+                          controllerBirth: controllerBirth,
+                          controllerPhone: controllerPhone,
+                        );
+                      },
+                    );
+                  }
                 },
                 style: FilledButton.styleFrom(
                   backgroundColor: Colors.red,
