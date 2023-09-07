@@ -1,3 +1,4 @@
+import 'package:contador/view/widgets/alerta.dart';
 import 'package:flutter/material.dart';
 
 class Cadastro extends StatefulWidget {
@@ -125,30 +126,11 @@ class _CadastroState extends State<Cadastro> {
                   showDialog<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Alerta'),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(controllerName.text),
-                            Text(controllerEmail.text),
-                            Text(controllerBirth.text),
-                            Text(controllerPhone.text),
-                          ],
-                        ),
-                        actions: [
-                          ElevatedButton(
-                            onPressed: () {
-                              controllerName.text = '';
-                              controllerBirth.text = '';
-                              controllerEmail.text = '';
-                              controllerPhone.text = '';
-
-                              Navigator.pop(context);
-                            },
-                            child: const Text('OK'),
-                          ),
-                        ],
+                      return Alerta(
+                        controllerName: controllerName,
+                        controllerEmail: controllerEmail,
+                        controllerBirth: controllerBirth,
+                        controllerPhone: controllerPhone,
                       );
                     },
                   );
