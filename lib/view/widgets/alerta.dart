@@ -27,22 +27,23 @@ class _AlertaState extends State<Alerta> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+         
           Text.rich(TextSpan(children: [
-           const TextSpan(text: "Nome: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+           const TextSpan(text: 'Nome: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             TextSpan(text: widget.controllerName.text )
-          ])),
+          ],),),
           Text.rich(TextSpan(children: [
-           const TextSpan(text: "E-mail: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+           const TextSpan(text: 'E-mail: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             TextSpan(text: widget.controllerEmail.text )
-          ])),
+          ],),),
           Text.rich(TextSpan(children: [
-           const TextSpan(text: "Nascimento: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+           const TextSpan(text: 'Nascimento: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             TextSpan(text: widget.controllerBirth.text )
-          ])),
+          ],),),
           Text.rich(TextSpan(children: [
-           const TextSpan(text: "Telefone: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+           const TextSpan(text: 'Telefone: ', style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
             TextSpan(text: widget.controllerPhone.text )
-          ])),
+          ],),),
          
         ],
       ),
@@ -51,7 +52,8 @@ class _AlertaState extends State<Alerta> {
           width: double.infinity,
           child: ElevatedButton(
           
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.black, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)) ),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black, 
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)) ),
             onPressed: () {
               widget.controllerName.text = '';
               widget.controllerBirth.text = '';
