@@ -1,3 +1,4 @@
+
 import 'package:contador/view/widgets/alerta.dart';
 import 'package:contador/view/widgets/mixin_cotrole.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,10 @@ class Cadastro extends StatefulWidget {
   State<Cadastro> createState() => _CadastroState();
 }
 
-class _CadastroState extends State<Cadastro> with ValidatorMixin {
+class _CadastroState extends State<Cadastro> with ValidatorMixin{
   @override
   Widget build(BuildContext context) {
+    
     final _formKey = GlobalKey<FormState>();
     final controllerName = TextEditingController();
     final controllerEmail = TextEditingController();
@@ -59,7 +61,7 @@ class _CadastroState extends State<Cadastro> with ValidatorMixin {
             ),
             const Spacer(),
             Form(
-              // aqui foi criada uma key para o form onde foi declarada acima do 
+              // aqui foi criada uma key para o form onde foi declarada acima do
               // scaffold e ultilizada no onpessed
               key: _formKey,
               child: Column(
@@ -70,11 +72,15 @@ class _CadastroState extends State<Cadastro> with ValidatorMixin {
                     child: TextFormField(
                       controller: controllerName,
                       decoration: InputDecoration(
+                        
                         labelText: 'Nome',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
+                          
                         ),
+                        
                       ),
+                      
                       // aqui mostra como é usado o message do
                       // mixin para mensagem personalizada
                       validator: (value) => isNotEmpty(value, 'Nome inválido!'),
@@ -158,7 +164,7 @@ class _CadastroState extends State<Cadastro> with ValidatorMixin {
                   }
                 },
                 style: FilledButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                 ),
                 child: const Text('Enviar'),
               ),

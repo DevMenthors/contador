@@ -22,27 +22,46 @@ class _AlertaState extends State<Alerta> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Alerta'),
+      title: const Center(child:  Text('Dados cadastrados', style: TextStyle(color: Colors.red, fontWeight:  FontWeight.bold),)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.controllerName.text),
-          Text(widget.controllerEmail.text),
-          Text(widget.controllerBirth.text),
-          Text(widget.controllerPhone.text),
+          Text.rich(TextSpan(children: [
+           const TextSpan(text: "Nome: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            TextSpan(text: widget.controllerName.text )
+          ])),
+          Text.rich(TextSpan(children: [
+           const TextSpan(text: "E-mail: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            TextSpan(text: widget.controllerEmail.text )
+          ])),
+          Text.rich(TextSpan(children: [
+           const TextSpan(text: "Nascimento: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            TextSpan(text: widget.controllerBirth.text )
+          ])),
+          Text.rich(TextSpan(children: [
+           const TextSpan(text: "Telefone: ", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            TextSpan(text: widget.controllerPhone.text )
+          ])),
+         
         ],
       ),
       actions: [
-        ElevatedButton(
-          onPressed: () {
-            widget.controllerName.text = '';
-            widget.controllerBirth.text = '';
-            widget.controllerEmail.text = '';
-            widget.controllerPhone.text = '';
-
-            Navigator.pop(context);
-          },
-          child: const Text('OK'),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+          
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.black, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)) ),
+            onPressed: () {
+              widget.controllerName.text = '';
+              widget.controllerBirth.text = '';
+              widget.controllerEmail.text = '';
+              widget.controllerPhone.text = '';
+        
+              Navigator.pop(context);
+            },
+            child: const Text('OK'),
+          ),
         ),
       ],
     );
