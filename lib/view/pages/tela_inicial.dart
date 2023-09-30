@@ -24,9 +24,44 @@ class _TelaState extends State<TelaInicial> {
     });
   }
 
+  int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: NavigationBar(
+        onDestinationSelected: (int index){
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+        indicatorColor: Colors.red,
+        selectedIndex: currentPageIndex,
+        destinations: const <Widget>[
+        NavigationDestination(  
+        selectedIcon: Icon(Icons.person), 
+        icon: Icon(Icons.person_outline_outlined), 
+        label: 'Perfil',
+        ),
+
+        NavigationDestination(  
+        selectedIcon: Icon(Icons.home), 
+        icon: Icon(Icons.home_outlined), 
+        label: 'Home',
+        ),
+
+        NavigationDestination(  
+        selectedIcon: Icon(Icons.school), 
+        icon: Icon(Icons.school_outlined), 
+        label: 'DevMenthors',
+        ),
+
+        ],
+        ),
+
+
+
+
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -101,61 +136,31 @@ class _TelaState extends State<TelaInicial> {
         title: const Text('Contador'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            children: [
-              SizedBox(
-                width: double.infinity,
-                height: 45,
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                    side: const BorderSide(width: 2, color: Colors.red),
-                  ),
-                  onPressed: reset,
-                  child: const Text(
-                    'Zerar',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 200,
-              ),
-              Container(
-                height: 200,
-                width: 200,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(40),
-                ),
-                child: Text(
-                  '$number',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 60,
-                  ),
-                ),
-              ),
-            ],
+      body: <Widget>[
+        Container(
+          color: Colors.grey,
+          alignment: Alignment.center,
+          child: const Text('Sobre nós'),
+
+        ),
+        Container(
+          color: Colors.grey,
+          alignment: Alignment.center,
+          child: const Text('Página inicial'),),
+        Container(
+          color: Colors.grey[700],
+          alignment: Alignment.topCenter,
+          child: Padding(padding: EdgeInsets.only(top: 50), 
+          child: Column(children: [
+Image.asset('asset/dev_logo.png', width: 190,  ),
+
+          ],)  
           ),
+          
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: increment,
-        backgroundColor: Colors.red,
-        child: const Icon(
-          Icons.add_rounded,
-          size: 40,
-        ),
-      ),
+      ][currentPageIndex],
+      
     );
   }
 }
+
