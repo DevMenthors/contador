@@ -1,6 +1,10 @@
+import 'package:contador/view/pages/bottom_pages/dev_page.dart';
+import 'package:contador/view/pages/bottom_pages/pagina_inicial.dart';
+import 'package:contador/view/pages/bottom_pages/sobre.dart';
 import 'package:contador/view/pages/cadastro.dart';
 import 'package:contador/view/pages/nova_tela.dart';
 import 'package:flutter/material.dart';
+import 'package:sweet_nav_bar/sweet_nav_bar.dart';
 
 class TelaInicial extends StatefulWidget {
   const TelaInicial({super.key});
@@ -10,6 +14,13 @@ class TelaInicial extends StatefulWidget {
 }
 
 class _TelaState extends State<TelaInicial> {
+  int paginaAtual = 1;
+  late PageController controllerview = PageController(initialPage: paginaAtual);
+
+  final iconLinearGradiant = List<Color>.from([
+    const Color.fromARGB(255, 251, 2, 197),
+    const Color.fromARGB(255, 72, 3, 80)
+  ]);
   int number = 0;
 
   void increment() {
@@ -24,44 +35,37 @@ class _TelaState extends State<TelaInicial> {
     });
   }
 
-  int currentPageIndex = 0;
+  void setPaginaAtual(int page){
+    setState(() {
+      paginaAtual = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-        onDestinationSelected: (int index){
-          setState(() {
-            currentPageIndex = index;
-          });
-        },
-        indicatorColor: Colors.red,
-        selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
-        NavigationDestination(  
-        selectedIcon: Icon(Icons.person), 
-        icon: Icon(Icons.person_outline_outlined), 
-        label: 'Perfil',
-        ),
-
-        NavigationDestination(  
-        selectedIcon: Icon(Icons.home), 
-        icon: Icon(Icons.home_outlined), 
-        label: 'Home',
-        ),
-
-        NavigationDestination(  
-        selectedIcon: Icon(Icons.school), 
-        icon: Icon(Icons.school_outlined), 
-        label: 'DevMenthors',
-        ),
-
+      extendBody: true,
+      bottomNavigationBar: SweetNavBar(
+        currentIndex: paginaAtual,
+        paddingBackgroundColor: Colors.transparent,
+        items: [
+          SweetNavBarItem(
+              sweetActive: const Icon(Icons.home),
+              sweetIcon: const Icon(
+                Icons.home_outlined,
+              ),
+              sweetLabel: 'Home',
+              iconColors: iconLinearGradiant,
+              sweetBackground: Colors.red),
+          SweetNavBarItem(
+              sweetIcon: const Icon(Icons.business), sweetLabel: 'Business'),
+          SweetNavBarItem(
+              sweetIcon: const Icon(Icons.school), sweetLabel: 'School'),
         ],
-        ),
-
-
-
-
+        onTap: (index) {
+          controllerview.animateToPage(index, duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+        },
+      ),
       drawer: Drawer(
         child: Padding(
           padding: const EdgeInsets.all(8),
@@ -122,6 +126,7 @@ class _TelaState extends State<TelaInicial> {
         ),
       ),
       appBar: AppBar(
+        elevation: 0,
         leading: Builder(
           builder: (context) {
             return IconButton(
@@ -136,31 +141,15 @@ class _TelaState extends State<TelaInicial> {
         title: const Text('Contador'),
         centerTitle: true,
       ),
-      body: <Widget>[
-        Container(
-          color: Colors.grey,
-          alignment: Alignment.center,
-          child: const Text('Sobre nós'),
-
-        ),
-        Container(
-          color: Colors.grey,
-          alignment: Alignment.center,
-          child: const Text('Página inicial'),),
-        Container(
-          color: Colors.grey[700],
-          alignment: Alignment.topCenter,
-          child: Padding(padding: EdgeInsets.only(top: 50), 
-          child: Column(children: [
-Image.asset('asset/dev_logo.png', width: 190,  ),
-
-          ],)  
-          ),
-          
-        ),
-      ][currentPageIndex],
-      
+      body: PageView(
+        onPageChanged: setPaginaAtual,
+        controller: controllerview,
+        children: const[
+          SobrePage(),
+          PaginaInicial(),
+          DevPage(),
+        ],
+      )
     );
   }
 }
-
